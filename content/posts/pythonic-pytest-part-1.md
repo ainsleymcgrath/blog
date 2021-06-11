@@ -4,8 +4,6 @@ date: 2021-06-11
 draft: false
 ---
 
-# Pythonic Pytest Part 1: Fixtures
-
 Pytest is a wonderful testing library. And like most things worth learning, there are some unfamiliar, novel concepts that come with it. Or at least they were unfamiliar to me when I picked it up!
 
 # Getting Started
