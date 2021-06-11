@@ -1,6 +1,6 @@
 ---
-title: "Hello World"
-date: 2020-06-11
+title: "Pythonic Pytest Part 1: Fixtures"
+date: 2021-06-11
 draft: false
 ---
 
