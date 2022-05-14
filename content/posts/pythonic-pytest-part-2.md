@@ -1,5 +1,5 @@
 ---
-title: "Pythonic Pytest Part 2: The Parametrization Mantra 🧘🏽‍♂️"
+title: "Pythonic Pytest Part 2: The Parametrization Mantra"
 date: 2022-05-14T14:02:53-05:00
 draft: false
 ---
