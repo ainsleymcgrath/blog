@@ -42,42 +42,44 @@ This is an example of the “lowish-level” code that is generally great to uni
 
 ```python
 def take_up_to_n(n, it):
-		"""Return as many members of the iterable as specified by `n`.
-		If n >= len(it), return all the elements."""
-		_it = iter(it)  # guarantee given object can be next()'d
-		out = []
-		for _ in range(n):
-				try:
-						out.append(next(_it))
-				except StopIteration:
-						# oops! out of elements
-						return out
+    """Return as many members of the iterable as specified by `n`.
+    If n >= len(it), return all the elements."""
+    _it = iter(it)  # guarantee given object can be next()'d
+    out = []
+    for _ in range(n):
+        try:
+            out.append(next(_it))
+        except StopIteration:
+            # oops! out of elements
+            return out
 
-		return out
+    return out
 ```
 
 Here are some plain ol’ tests to prove it out:
 
 ```python
-	def test_take_n_less_than_length():
-    assert take_up_to_n(2, ["!", "?", "..."]) == ["!", "?"], (
-        "With sequence of len < n, return list of first n elements"
-    )
+def test_take_n_less_than_length():
+    assert take_up_to_n(
+        2, ["!", "?", "..."] == ["!", "?"]
+    ), "With seq of len < n, return list of 1st n elements"
+
 
 def test_take_n_greater_than_length():
     assert take_up_to_n(5, [1, 2, 3]) == [1, 2, 3], (
-        "With sequence of len > n, return list of all the elements"
+        "With seq of len > n, always return all the original elements"
     )
 
+
 def test_take_n_empty_sequence():
-    assert take(1000, []) == [], (
-        "With an empty sequence, an empty sequence is returned"
-		)
+    assert take(1000, []) == [], "With an empty sequence, an empty sequence is returned"
+
 
 def test_take_n_zero():
-    assert take(0, [object(), 0, "123"]) == [], (
-       "With n=0, an empty sequence is returned"
-		)
+    assert (
+        take(0, [object(), 0, "123"]) == []
+    ), "With n=0, an empty sequence is returned"
+
 ```
 
 Great! Some documented, tested code.
@@ -118,17 +120,18 @@ import pytest
 def is_bread(thing: str) -> bool:
     return thing == "bread"
 
+
 # using this decorator 'registers' the function as a fixture
 @pytest.fixture
 def non_bread() -> str:
-		return "friendship"
+    return "friendship"
+
 
 # when a test function has an argument with the same name as some fixture,
 # it 'requests' the fixture's return value for use
 def test_is_bread(non_bread):
-    assert is_bread(non_bread) is False, ( 
-        "When passed a non-bread "
-        "function returns False"
+    assert is_bread(non_bread) is False, (
+        "When passed a non-bread " "function returns False"
     )
 ```
 
@@ -230,9 +233,9 @@ Imagine it as a (pseudo) Python type.
 
 ```python
 Tuple[
-	Given["function inputs"]
-	Expected["desired return value"]
-	Should["prose description of the test"]
+    Given["function inputs"],
+    Expected["desired return value"],
+    Should["prose description of the test"],
 ]
 ```
 
@@ -253,10 +256,10 @@ Without getting into too much detail, it's achieved with a keyword-argument call
 *Every single fixture* can refer to a [built-in pytest fixture called `request`](https://docs.pytest.org/en/6.2.x/reference.html#request). This object contains a ton of data about the current test run. When you pass `params`, the injected value on each test run is bound to `request.param`.
 
 ```python
-@pytest.fixture(params=[{'apple', 'papaya'}, 'banana', None])
+@pytest.fixture(params=[{"apple", "papaya"}, "banana", None])
 def stocked_pantry(request):
-  	# it's often helpful to assign the value of `request.param` for clarity
-  	thing_in_pantry = request.param
+    # it's often helpful to assign the value of `request.param` for clarity
+    thing_in_pantry = request.param
 ```
 
 This fixture will be set up in 3 different ways, resulting in all downstream dependent tests running 3 times.
