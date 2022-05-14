@@ -32,7 +32,7 @@ The following is a complete unit test for a a silly function:
 ```python
 # the function under test
 def is_bread(thing: str) -> bool:
-		"""Predicate: Determine if incoming `thing` is bread."""
+    """Predicate: Determine if incoming `thing` is bread."""
     return thing == "bread"
 
 # the test
@@ -77,7 +77,7 @@ def is_bread(thing: str) -> bool:
 # using this decorator 'registers' the function as a fixture
 @pytest.fixture
 def non_bread() -> str:
-		return "friendship"
+    return "friendship"
 
 # when a test function has an argument with the same name as some fixture,
 # it 'requests' the fixture's return value for use
@@ -105,7 +105,7 @@ from sqlite import Connection
 
 def is_bread(connection: Connection, thing_name: str) -> bool:
     cursor = connection.execute(
-				# in sqlite, `?` is used as a placeholder
+        # in sqlite, `?` is used as a placeholder
         "select is_bread from things where name = ?", (thing_name,)
     )
     (result,) = cursor.fetchone()
