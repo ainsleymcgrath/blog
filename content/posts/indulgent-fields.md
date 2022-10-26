@@ -114,7 +114,7 @@ from pathlib import Path
 
 def json_config_field_specifier(path):
     with Path(str).open() as file:
-	    content = json.load(file)
+        content = json.load(file)
     return field(default_factory=lambda: JsonConfig(**content))
 ```
 
@@ -198,7 +198,7 @@ import msgpack
 
 def dataclass_msgpack(record):
     # inspect the `Field` objects' metadata
-	exclude_keys = {f.name for f in fields(record) if 'no_msgpack' in f.metadata}
+    exclude_keys = {f.name for f in fields(record) if 'no_msgpack' in f.metadata}
     data = {k: v for k, v in asdict(record).items() if k not in exclude_keys}
     return msgpack.packb(data)
 ```
