@@ -46,8 +46,6 @@ You "see" interfaces with type hints so, **make sure you're annotating every sig
 
 ## The Anti-Pattern :no_entry_sign:
 
-When it comes to business logic, it's easier to think about what is _not_ advantageous.
-
 Let's take this [pseudocode] example of a widely-used function in a social app for bakers.
 
 ```python
@@ -80,11 +78,11 @@ The typing doesn't feel worth the exercise.
 
 Turns out typing functions like this feels bad because functions like this are bad.
 
-**The issue is that this function and code similar to it is a signature of exclusively primitives.** A second, subtler issue is that `db` is completely absent.
+**The issue is that this function and code similar to it is a signature composed exclusively of primitives.** A second, subtler issue is that `db` is completely absent.
 
 ### Primitives do not extend :monkey:
 
-Answer these questions and quickly understand why `get_baker_id` will extend poorly if it's the primary mechanism for getting the business entity of "Baker."
+Answer these questions and quickly understand why `get_baker_id` will extend poorly if it's the primary mechanism for getting the business entity of "a Baker."
 
 1. What if you want to support other ways for bakers to identify themselves, such as with a phone number or OTP?
 2. How do you feel about altering the implementation of `db`? (Which, is not even clearly a part of this function.)
@@ -97,7 +95,7 @@ And the reason is that we are dealing with our _business domain_ by handing arou
 
 ## Advantageous Python Function Signatures :moneybag:
 
-A dependency-injection-ish version would look like this
+A dependency-injection-minded version would look like this
 
 ```python
 def get_baker(db, params):
@@ -119,7 +117,7 @@ Now, rather than dealing with scalar primitives...
 
 It's hard to see the benefit of the refactor just yet. Reason being that **you can't see the full specification of this function in its signature.** The intrepid among us will read the whole block into their cavernous working memory and just chug. But I, for one, am busy, stressed, in a hurry, and juggling most of the time.
 
-A quick summary is extremely valuable for someone who reads code professionally. (That's you.)
+**A quick summary is extremely valuable for someone who reads code professionally.** (That's you.)
 
 Here's the signature of the refactored function above:
 
@@ -140,9 +138,7 @@ Now, something amazing has happened: Maintainers have gained superpowers:
 
 ## The Pattern :star2:
 
-The three words in the heading represent three general object patterns that can replace primitives at least 80% of the time.
-
-Three of the three are already in the example at hand.
+Let `Info`, `Params`, and `Resource` guide your designs. Expose them in type hints and call it a day!
 
 ```python
 def get_baker(db: Database, params: BakerGetParams) -> BakerInfo: ...
@@ -225,6 +221,10 @@ Simply choose not to be weird and follow these steps:
 3. Pass 'em on down. Allow `Info` to come into existence as needed.
 4. Profit! :money_mouth_face: Your teammates wil thank you and your mind will be at ease with well-documented, predictable code.
 
-Why so blasé? Because it's not a hude deal. Software is hard enough without more patterns and guidelines and supposed-best-practices. [Said the blogger literally telling you how to code.]
+## Dont be weird about it.
+
+You don't need a library. You dont need to read a book.
+
+Because it's not a hude deal. Software is hard enough without more patterns and guidelines and supposed-best-practices. [Said the blogger literally telling you how to code.]
 
 Just get the most out of your Python types by reaching for three of their most obvious forms.
