@@ -1,7 +1,7 @@
 ---
 title: "Dependency_injection_without_being_weird_about_it"
-date: 2023-10-16T14:01:29-05:00
-draft: true
+date: 2023-10-28T14:11:28-00:00
+draft: false
 ---
 
 ## The Mysterious Promise of Dependency Injection :crystal_ball:
